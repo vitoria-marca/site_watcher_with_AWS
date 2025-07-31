@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Configurações
-SITE_URL="http://23.23.176.109/"
+SITE_URL="$MY_IP"
 LOG_FILE="/var/log/monitoramento_site.log"
-DISCORD_WEBHOOK={{WEBHOOK}}
+DISCORD_WEBHOOK="$WEBHOOK"
 
 # garantindo a existência do diretório
 mkdir -p "$(dirname "$LOG_FILE")"
