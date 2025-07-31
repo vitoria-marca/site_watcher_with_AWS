@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Carrega variáveis do .env (caminho relativo ao script)
+ENV_FILE="$(dirname "$0")/.env"
+if [ -f "$ENV_FILE" ]; then
+    source "$ENV_FILE"
+else
+    echo "Erro: Arquivo .env não encontrado em $(dirname "$0")!" >&2
+    exit 1
+fi
+
 # Configurações
 SITE_URL="$MY_IP"
 LOG_FILE="/var/log/monitoramento_site.log"
@@ -24,7 +33,7 @@ check_site() {
     else
         log "ALERTA: Site $SITE_URL OFFLINE (Status: $HTTP_STATUS)"
         send_notification "🔴 Site $SITE_URL está OFFLINE! Status: $HTTP_STATUS"
-        return 1.
+        exit 1
     fi
 }
 
